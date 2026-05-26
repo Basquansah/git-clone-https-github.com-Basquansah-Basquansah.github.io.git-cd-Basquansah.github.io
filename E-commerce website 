@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="TechNova Store – Ghana's premier online tech retailer. Shop laptops, smartphones, accessories and more." />
+  <title>TechNova Store | Ghana's Premier Tech Retailer</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <!-- Favicons -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%232563eb'/><text y='24' font-size='20' fill='white'>⚡</text></svg>" />
+</head>
+<body>
+
+  <!-- Skip to main content (Accessibility Feature 1) -->
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+
+  <!-- Promo Strip -->
+  <div class="promo-strip" role="banner" aria-label="Promotional announcement">
+    <p>🎉 <strong>FREE DELIVERY</strong> on orders above GH₵500 &nbsp;|&nbsp; Use code <strong>TECHNOVA10</strong> for 10% off your first order</p>
+  </div>
+
+  <!-- Navbar -->
+  <nav class="navbar" role="navigation" aria-label="Main navigation">
+    <a href="index.html" class="nav-logo" aria-label="TechNova Store Home">
+      <div class="logo-icon" aria-hidden="true">⚡</div>
+      Tech<span>Nova</span>
+    </a>
+
+    <button class="hamburger" aria-expanded="false" aria-controls="nav-links" aria-label="Toggle navigation menu">
+      <span></span><span></span><span></span>
+    </button>
+
+    <ul class="nav-links" id="nav-links" role="list">
+      <li><a href="index.html" class="active" aria-current="page">Home</a></li>
+      <li><a href="shop.html">Shop</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="contact.html">Contact</a></li>
+      <li><a href="cart.html">Cart</a></li>
+    </ul>
+
+    <div class="nav-right">
+      <!-- Global Search -->
+      <div class="search-bar" role="search" aria-label="Search products">
+        <input type="search" placeholder="Search products…" aria-label="Search products" />
+        <button type="button" aria-label="Submit search">🔍</button>
+      </div>
+
+      <!-- Accessibility Controls (Feature 2: Font size & contrast) -->
+      <button class="nav-icon-btn" id="contrastToggle" title="Toggle high contrast mode" aria-label="Toggle high contrast mode">🔆</button>
+      <button class="nav-icon-btn" id="fontSizeToggle" title="Change font size" aria-label="Change font size">Aa</button>
+
+      <!-- Cart -->
+      <a href="cart.html" class="nav-icon-btn" aria-label="Shopping cart">
+        🛒
+        <span class="cart-badge" aria-label="Items in cart">0</span>
+      </a>
+    </div>
+  </nav>
+
+  <!-- On-page text search toolbar -->
+  <div class="page-search-bar" role="search" aria-label="Search content on this page">
+    <label for="pageSearchInput">Find on page:</label>
+    <input type="search" id="pageSearchInput" placeholder="Type to highlight text…" aria-label="Search page content" />
+    <span class="match-count" id="matchCount" aria-live="polite" aria-atomic="true"></span>
+    <button id="prevMatch" aria-label="Previous match">↑ Prev</button>
+    <button id="nextMatch" aria-label="Next match">↓ Next</button>
+    <button id="clearSearch" aria-label="Clear search">✕</button>
+  </div>
+
+  <!-- MAIN CONTENT -->
+  <main id="main-content" id="searchable-content">
+
+    <!-- ===== HERO ===== -->
+    <section class="hero" aria-label="Hero banner">
+      <div class="hero-video-wrap">
+        <!-- Background video (muted + autoplay for accessibility) -->
+        <video autoplay muted loop playsinline aria-hidden="true"
+               poster="https://images.unsplash.com/photo-1518770660439-4636190af475?w=1600&q=80">
+          <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4" />
+          Your browser does not support the video tag.
+        </video>
+      </div>
+      <div class="hero-overlay" aria-hidden="true"></div>
+      <div class="hero-grid" aria-hidden="true"></div>
+
+      <div class="hero-content">
+        <div class="hero-eyebrow">
+          <span class="dot" aria-hidden="true"></span>
+          Ghana's #1 Tech Destination
+        </div>
+
+        <h1 class="hero-title">
+          Power Your <span class="accent">Digital</span><br />
+          Life with <span class="amber">TechNova</span>
+        </h1>
+
+        <p class="hero-desc">
+          Discover the latest laptops, smartphones, accessories, and smart home devices — all delivered to your doorstep across Ghana with fast, reliable shipping.
+        </p>
+
+        <div class="hero-cta">
+          <a href="shop.html" class="btn btn-primary">Shop Now &rarr;</a>
+          <a href="about.html" class="btn btn-secondary">Our Story</a>
+        </div>
+
+        <div class="hero-stats" aria-label="Store statistics">
+          <div>
+            <div class="hero-stat-num">12K+</div>
+            <div class="hero-stat-label">Happy Customers</div>
+          </div>
+          <div class="hero-stat-divider" aria-hidden="true"></div>
+          <div>
+            <div class="hero-stat-num">500+</div>
+            <div class="hero-stat-label">Products</div>
+          </div>
+          <div class="hero-stat-divider" aria-hidden="true"></div>
+          <div>
+            <div class="hero-stat-num">4.9★</div>
+            <div class="hero-stat-label">Avg. Rating</div>
+          </div>
+          <div class="hero-stat-divider" aria-hidden="true"></div>
+          <div>
+            <div class="hero-stat-num">24h</div>
+            <div class="hero-stat-label">Delivery (Accra)</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== WHY SHOP WITH US ===== -->
+    <section class="section" aria-labelledby="features-heading">
+      <div class="section-tag">Why TechNova</div>
+      <h2 class="section-title" id="features-heading">Built for the Ghanaian Tech Lover</h2>
+      <p class="section-subtitle">We combine global products with local expertise — fast shipping, easy returns, and genuine warranties on every item.</p>
+
+      <div class="feature-grid" role="list">
+        <article class="feature-card" role="listitem">
+          <div class="feature-icon" aria-hidden="true">🚀</div>
+          <h3 class="feature-title">Fast Delivery</h3>
+          <p class="feature-desc">Same-day delivery in Accra, next-day nationwide. We partner with trusted couriers for safe, timely delivery.</p>
+        </article>
+        <article class="feature-card" role="listitem">
+          <div class="feature-icon" aria-hidden="true">🛡️</div>
+          <h3 class="feature-title">Genuine Products</h3>
+          <p class="feature-desc">Every item comes with a manufacturer warranty. We source directly from authorised distributors only.</p>
+        </article>
+        <article class="feature-card" role="listitem">
+          <div class="feature-icon" aria-hidden="true">💳</div>
+          <h3 class="feature-title">Flexible Payments</h3>
+          <p class="feature-desc">Pay via Mobile Money (MTN, Vodafone, AirtelTigo), credit/debit cards, or bank transfer. Installments available.</p>
+        </article>
+        <article class="feature-card" role="listitem">
+          <div class="feature-icon" aria-hidden="true">🔄</div>
+          <h3 class="feature-title">Easy Returns</h3>
+          <p class="feature-desc">Not satisfied? Return within 14 days, no questions asked. Your peace of mind is our priority.</p>
+        </article>
+        <article class="feature-card" role="listitem">
+          <div class="feature-icon" aria-hidden="true">🎧</div>
+          <h3 class="feature-title">24/7 Support</h3>
+          <p class="feature-desc">Our tech experts are always here — via chat, phone, or email to help you choose and troubleshoot.</p>
+        </article>
+        <article class="feature-card" role="listitem">
+          <div class="feature-icon" aria-hidden="true">♻️</div>
+          <h3 class="feature-title">Trade-In Programme</h3>
+          <p class="feature-desc">Get credit for your old device when you upgrade. Quick valuation and instant store credit.</p>
+        </article>
+      </div>
+    </section>
+
+    <div class="divider" aria-hidden="true"></div>
+
+    <!-- ===== FEATURED PRODUCTS ===== -->
+    <section class="section" aria-labelledby="featured-heading">
+      <div class="section-tag">Featured</div>
+      <h2 class="section-title" id="featured-heading">Trending Right Now</h2>
+      <p class="section-subtitle">Hand-picked bestsellers our customers love the most this season.</p>
+
+      <!-- Category pills -->
+      <div class="category-strip" role="tablist" aria-label="Filter products by category">
+        <button class="cat-pill active" data-cat="all" role="tab" aria-selected="true">All Products</button>
+        <button class="cat-pill" data-cat="laptops" role="tab" aria-selected="false">Laptops</button>
+        <button class="cat-pill" data-cat="phones" role="tab" aria-selected="false">Phones</button>
+        <button class="cat-pill" data-cat="audio" role="tab" aria-selected="false">Audio</button>
+        <button class="cat-pill" data-cat="accessories" role="tab" aria-selected="false">Accessories</button>
+      </div>
+
+      <div class="product-grid" role="list">
+
+        <!-- Product 1 -->
+        <div class="product-col" role="listitem">
+          <article class="product-card" data-cat="laptops" aria-label="Dell XPS 15 laptop">
+            <div class="product-img-wrap">
+              <img src="https://images.unsplash.com/photo-1593642632559-0c6d3fc62b89?w=600&q=80"
+                   alt="Dell XPS 15 laptop on a desk" loading="lazy" />
+              <span class="product-badge">Bestseller</span>
+              <div class="product-actions-overlay">
+                <button class="btn btn-sm btn-primary" onclick="addToCart('laptop-001','Dell XPS 15',8999,'https://images.unsplash.com/photo-1593642632559-0c6d3fc62b89?w=200')">Add to Cart</button>
+                <a href="shop.html" class="btn btn-sm btn-secondary">Details</a>
+              </div>
+            </div>
+            <div class="product-body">
+              <div class="product-category">Laptops</div>
+              <h3 class="product-name">Dell XPS 15 (12th Gen)</h3>
+              <div class="product-rating" aria-label="Rating: 4.8 out of 5 stars, 312 reviews">
+                <span class="stars" aria-hidden="true">★★★★★</span>
+                <span class="rating-count">(312)</span>
+              </div>
+              <div class="product-price-row">
+                <span class="product-price">GH₵ 8,999</span>
+                <span class="product-price-old">GH₵ 10,500</span>
+                <button class="product-add-btn" onclick="addToCart('laptop-001','Dell XPS 15',8999,'https://images.unsplash.com/photo-1593642632559-0c6d3fc62b89?w=200')" aria-label="Add Dell XPS 15 to cart">+</button>
+              </div>
+            </div>
+          </article>
+        </div>
+
+        <!-- Product 2 -->
+        <div class="product-col" role="listitem">
+          <article class="product-card" data-cat="phones" aria-label="Samsung Galaxy S24 Ultra smartphone">
+            <div class="product-img-wrap">
+              <img src="https://images.unsplash.com/photo-1610945415295-d9bbf067e59c?w=600&q=80"
+                   alt="Samsung Galaxy S24 Ultra smartphone" loading="lazy" />
+              <span class="product-badge new">New</span>
+              <div class="product-actions-overlay">
+                <button class="btn btn-sm btn-primary" onclick="addToCart('phone-001','Samsung S24 Ultra',7499,'https://images.unsplash.com/photo-1610945415295-d9bbf067e59c?w=200')">Add to Cart</button>
+                <a href="shop.html" class="btn btn-sm btn-secondary">Details</a>
+              </div>
+            </div>
+            <div class="product-body">
+              <div class="product-category">Smartphones</div>
+              <h3 class="product-name">Samsung Galaxy S24 Ultra</h3>
+              <div class="product-rating" aria-label="Rating: 4.9 out of 5 stars, 580 reviews">
+                <span class="stars" aria-hidden="true">★★★★★</span>
+                <span class="rating-count">(580)</span>
+              </div>
+              <div class="product-price-row">
+                <span class="product-price">GH₵ 7,499</span>
+                <button class="product-add-btn" onclick="addToCart('phone-001','Samsung S24 Ultra',7499,'https://images.unsplash.com/photo-1610945415295-d9bbf067e59c?w=200')" aria-label="Add Samsung Galaxy S24 Ultra to cart">+</button>
+              </div>
+            </div>
+          </article>
+        </div>
+
+        <!-- Product 3 -->
+        <div class="product-col" role="listitem">
+          <article class="product-card" data-cat="audio" aria-label="Sony WH-1000XM5 headphones">
+            <div class="product-img-wrap">
+              <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=600&q=80"
+                   alt="Sony WH-1000XM5 wireless headphones" loading="lazy" />
+              <span class="product-badge sale">Sale</span>
+              <div class="product-actions-overlay">
+                <button class="btn btn-sm btn-primary" onclick="addToCart('audio-001','Sony WH-1000XM5',1299,'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=200')">Add to Cart</button>
+                <a href="shop.html" class="btn btn-sm btn-secondary">Details</a>
+              </div>
+            </div>
+            <div class="product-body">
+              <div class="product-category">Audio</div>
+              <h3 class="product-name">Sony WH-1000XM5</h3>
+              <div class="product-rating" aria-label="Rating: 4.8 out of 5 stars, 241 reviews">
+                <span class="stars" aria-hidden="true">★★★★★</span>
+                <span class="rating-count">(241)</span>
+              </div>
+              <div class="product-price-row">
+                <span class="product-price">GH₵ 1,299</span>
+                <span class="product-price-old">GH₵ 1,699</span>
+                <button class="product-add-btn" onclick="addToCart('audio-001','Sony WH-1000XM5',1299,'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=200')" aria-label="Add Sony WH-1000XM5 to cart">+</button>
+              </div>
+            </div>
+          </article>
+        </div>
+
+        <!-- Product 4 -->
+        <div class="product-col" role="listitem">
+          <article class="product-card" data-cat="accessories" aria-label="Apple Watch Series 9 smartwatch">
+            <div class="product-img-wrap">
+              <img src="https://images.unsplash.com/photo-1546868871-7041f2a55e12?w=600&q=80"
+                   alt="Apple Watch Series 9 smartwatch" loading="lazy" />
+              <div class="product-actions-overlay">
+                <button class="btn btn-sm btn-primary" onclick="addToCart('acc-001','Apple Watch S9',2999,'https://images.unsplash.com/photo-1546868871-7041f2a55e12?w=200')">Add to Cart</button>
+                <a href="shop.html" class="btn btn-sm btn-secondary">Details</a>
+              </div>
+            </div>
+            <div class="product-body">
+              <div class="product-category">Wearables</div>
+              <h3 class="product-name">Apple Watch Series 9</h3>
+              <div class="product-rating" aria-label="Rating: 4.7 out of 5 stars, 189 reviews">
+                <span class="stars" aria-hidden="true">★★★★☆</span>
+                <span class="rating-count">(189)</span>
+              </div>
+              <div class="product-price-row">
+                <span class="product-price">GH₵ 2,999</span>
+                <button class="product-add-btn" onclick="addToCart('acc-001','Apple Watch S9',2999,'https://images.unsplash.com/photo-1546868871-7041f2a55e12?w=200')" aria-label="Add Apple Watch Series 9 to cart">+</button>
+              </div>
+            </div>
+          </article>
+        </div>
+
+      </div>
+
+      <div class="text-center mt-32">
+        <a href="shop.html" class="btn btn-secondary">View All Products &rarr;</a>
+      </div>
+    </section>
+
+    <!-- ===== SOCIAL MEDIA NEWSFEED ===== -->
+    <section class="section social-section" aria-labelledby="social-heading">
+      <div class="section-tag">Community</div>
+      <h2 class="section-title" id="social-heading">Follow Us &amp; Stay Connected</h2>
+      <p class="section-subtitle">Join 50,000+ tech lovers in our community. Share your unboxing moments with <strong>#TechNovaGH</strong></p>
+
+      <!-- Social follow buttons -->
+      <div class="social-buttons" role="list" aria-label="Social media links">
+        <a href="#" class="social-btn twitter" aria-label="Follow TechNova on Twitter" role="listitem">
+          <span aria-hidden="true">𝕏</span> @TechNovaGH
+        </a>
+        <a href="#" class="social-btn instagram" aria-label="Follow TechNova on Instagram" role="listitem">
+          <span aria-hidden="true">📸</span> @technova_gh
+        </a>
+        <a href="#" class="social-btn facebook" aria-label="Like TechNova on Facebook" role="listitem">
+          <span aria-hidden="true">f</span> TechNova Ghana
+        </a>
+        <a href="#" class="social-btn youtube" aria-label="Subscribe to TechNova on YouTube" role="listitem">
+          <span aria-hidden="true">▶</span> TechNova Reviews
+        </a>
+        <a href="#" class="social-btn tiktok" aria-label="Follow TechNova on TikTok" role="listitem">
+          <span aria-hidden="true">♪</span> @TechNovaGH
+        </a>
+      </div>
+
+      <!-- Social image feed (simulated newsfeed) -->
+      <div class="social-feed-grid" role="list" aria-label="Social media image feed">
+        <div class="social-post" role="listitem" aria-label="Community photo">
+          <img src="https://images.unsplash.com/photo-1517336714731-489689fd1ca8?w=400&q=80" alt="MacBook unboxing photo" loading="lazy" />
+          <div class="social-post-overlay">
+            <span class="icon" aria-hidden="true">📸</span>
+            <span>❤️ 1.2K</span>
+          </div>
+        </div>
+        <div class="social-post" role="listitem" aria-label="Community photo">
+          <img src="https://images.unsplash.com/photo-1592750475338-74b7b21085ab?w=400&q=80" alt="iPhone setup photo" loading="lazy" />
+          <div class="social-post-overlay">
+            <span class="icon" aria-hidden="true">📸</span>
+            <span>❤️ 876</span>
+          </div>
+        </div>
+        <div class="social-post" role="listitem" aria-label="Community photo">
+          <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&q=80" alt="Tech desk setup" loading="lazy" />
+          <div class="social-post-overlay">
+            <span class="icon" aria-hidden="true">📸</span>
+            <span>❤️ 2.1K</span>
+          </div>
+        </div>
+        <div class="social-post" role="listitem" aria-label="Community photo">
+          <img src="https://images.unsplash.com/photo-1498049794561-7780e7231661?w=400&q=80" alt="Smart devices on table" loading="lazy" />
+          <div class="social-post-overlay">
+            <span class="icon" aria-hidden="true">📸</span>
+            <span>❤️ 643</span>
+          </div>
+        </div>
+        <div class="social-post" role="listitem" aria-label="Community photo">
+          <img src="https://images.unsplash.com/photo-1526406915894-7bcd65f60845?w=400&q=80" alt="Gaming setup" loading="lazy" />
+          <div class="social-post-overlay">
+            <span class="icon" aria-hidden="true">📸</span>
+            <span>❤️ 1.8K</span>
+          </div>
+        </div>
+        <div class="social-post" role="listitem" aria-label="Community photo">
+          <img src="https://images.unsplash.com/photo-1544244015-0df4b3ffc6b0?w=400&q=80" alt="Tablet and coffee" loading="lazy" />
+          <div class="social-post-overlay">
+            <span class="icon" aria-hidden="true">📸</span>
+            <span>❤️ 910</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="divider" aria-hidden="true"></div>
+
+    <!-- ===== NEWSLETTER ===== -->
+    <section class="section newsletter-section" aria-labelledby="newsletter-heading">
+      <div class="newsletter-inner">
+        <div class="section-tag">Newsletter</div>
+        <h2 class="section-title" id="newsletter-heading">Get Exclusive Deals</h2>
+        <p class="section-subtitle">Subscribe and be the first to know about flash sales, new arrivals, and tech tips tailored for you.</p>
+        <form class="newsletter-form" aria-label="Newsletter subscription form" onsubmit="handleNewsletter(event)">
+          <input type="email" placeholder="Enter your email address" aria-label="Email address for newsletter" required />
+          <button type="submit" class="btn btn-primary">Subscribe</button>
+        </form>
+        <p class="text-small text-muted mt-16">No spam, unsubscribe any time. We respect your privacy.</p>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ===== FOOTER ===== -->
+  <footer role="contentinfo">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="index.html" class="nav-logo" style="display:inline-flex">
+          <div class="logo-icon" aria-hidden="true">⚡</div>
+          Tech<span>Nova</span>
+        </a>
+        <p>Ghana's trusted online tech store. Premium gadgets delivered to your door — with local knowledge and global selection.</p>
+        <div class="social-buttons" style="margin-top:16px">
+          <a href="#" class="social-btn twitter" aria-label="Twitter">𝕏</a>
+          <a href="#" class="social-btn instagram" aria-label="Instagram">📸</a>
+          <a href="#" class="social-btn facebook" aria-label="Facebook">f</a>
+          <a href="#" class="social-btn youtube" aria-label="YouTube">▶</a>
+        </div>
+      </div>
+
+      <div>
+        <h3 class="footer-col-title">Shop</h3>
+        <ul class="footer-links">
+          <li><a href="shop.html">All Products</a></li>
+          <li><a href="shop.html?cat=laptops">Laptops</a></li>
+          <li><a href="shop.html?cat=phones">Smartphones</a></li>
+          <li><a href="shop.html?cat=audio">Audio</a></li>
+          <li><a href="shop.html?cat=accessories">Accessories</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h3 class="footer-col-title">Company</h3>
+        <ul class="footer-links">
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="contact.html">Contact</a></li>
+          <li><a href="#">Careers</a></li>
+          <li><a href="#">Press</a></li>
+          <li><a href="#">Blog</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h3 class="footer-col-title">Support</h3>
+        <ul class="footer-links">
+          <li><a href="#">FAQ</a></li>
+          <li><a href="#">Returns Policy</a></li>
+          <li><a href="#">Warranty Info</a></li>
+          <li><a href="#">Track Order</a></li>
+          <li><a href="#">Sitemap</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>&copy; 2025 TechNova Store. All rights reserved. &middot; Accra, Ghana 🇬🇭</p>
+      <div class="payment-icons" aria-label="Accepted payment methods">
+        <span>💳</span> Visa &bull; Mastercard &bull; MTN MoMo &bull; Vodafone Cash &bull; AirtelTigo Money
+      </div>
+      <div class="footer-bottom-links">
+        <a href="#">Privacy</a>
+        <a href="#">Terms</a>
+        <a href="#">Accessibility</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+  <script>
+    function handleNewsletter(e) {
+      e.preventDefault();
+      showToast('🎉 You\'re subscribed! Check your inbox for a welcome gift.', 'success');
+      e.target.reset();
+    }
+  </script>
+</body>
+</html>
