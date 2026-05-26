@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Your shopping cart – TechNova Store Ghana." />
+  <title>Cart | TechNova Store</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%232563eb'/><text y='24' font-size='20' fill='white'>⚡</text></svg>" />
+  <style>
+    .cart-layout { display: grid; grid-template-columns: 1fr 340px; gap: 32px; align-items: start; }
+    @media(max-width:768px){ .cart-layout{ grid-template-columns:1fr; } }
+    .empty-cart { text-align:center; padding: 80px 20px; }
+    .empty-icon { font-size:5rem; margin-bottom:16px; }
+    .remove-btn { background:none; border:none; color:var(--red); cursor:pointer; font-size:1.1rem; padding:4px 8px; border-radius:4px; transition:background var(--transition); }
+    .remove-btn:hover { background: rgba(239,68,68,0.1); }
+  </style>
+</head>
+<body>
+
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+
+  <nav class="navbar" role="navigation" aria-label="Main navigation">
+    <a href="index.html" class="nav-logo" aria-label="TechNova Store Home">
+      <div class="logo-icon" aria-hidden="true">⚡</div>Tech<span>Nova</span>
+    </a>
+    <button class="hamburger" aria-expanded="false" aria-controls="nav-links" aria-label="Toggle navigation menu">
+      <span></span><span></span><span></span>
+    </button>
+    <ul class="nav-links" id="nav-links" role="list">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="shop.html">Shop</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="contact.html">Contact</a></li>
+      <li><a href="cart.html" class="active" aria-current="page">Cart</a></li>
+    </ul>
+    <div class="nav-right">
+      <div class="search-bar" role="search" aria-label="Search products">
+        <input type="search" placeholder="Search products…" aria-label="Search products" />
+        <button type="button" aria-label="Submit search">🔍</button>
+      </div>
+      <button class="nav-icon-btn" id="contrastToggle" title="Toggle high contrast" aria-label="Toggle high contrast mode">🔆</button>
+      <button class="nav-icon-btn" id="fontSizeToggle" title="Change font size" aria-label="Change font size">Aa</button>
+      <a href="cart.html" class="nav-icon-btn" aria-label="Shopping cart">🛒<span class="cart-badge">0</span></a>
+    </div>
+  </nav>
+
+  <div class="page-search-bar" role="search" aria-label="Search content on this page">
+    <label for="pageSearchInput">Find on page:</label>
+    <input type="search" id="pageSearchInput" placeholder="Highlight text on page…" aria-label="Search page content" />
+    <span class="match-count" id="matchCount" aria-live="polite" aria-atomic="true"></span>
+    <button id="prevMatch" aria-label="Previous match">↑ Prev</button>
+    <button id="nextMatch" aria-label="Next match">↓ Next</button>
+    <button id="clearSearch" aria-label="Clear search">✕</button>
+  </div>
+
+  <!-- Page Hero -->
+  <div class="page-hero">
+    <div class="breadcrumb" aria-label="Breadcrumb">
+      <a href="index.html">Home</a>
+      <span class="breadcrumb-sep" aria-hidden="true">›</span>
+      <span aria-current="page">Shopping Cart</span>
+    </div>
+    <h1 class="section-title">Your Cart</h1>
+  </div>
+
+  <main id="main-content">
+    <section class="section" id="searchable-content" style="padding-top:32px;">
+
+      <div id="cartContainer">
+        <!-- Filled by JS -->
+      </div>
+
+    </section>
+  </main>
+
+  <footer role="contentinfo">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="index.html" class="nav-logo" style="display:inline-flex"><div class="logo-icon" aria-hidden="true">⚡</div>Tech<span>Nova</span></a>
+        <p>Ghana's trusted online tech store.</p>
+      </div>
+      <div><h3 class="footer-col-title">Shop</h3><ul class="footer-links"><li><a href="shop.html">All Products</a></li></ul></div>
+      <div><h3 class="footer-col-title">Company</h3><ul class="footer-links"><li><a href="about.html">About Us</a></li><li><a href="contact.html">Contact</a></li></ul></div>
+      <div><h3 class="footer-col-title">Support</h3><ul class="footer-links"><li><a href="#">FAQ</a></li><li><a href="#">Returns</a></li></ul></div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2025 TechNova Store. All rights reserved. 🇬🇭</p>
+      <div class="footer-bottom-links"><a href="#">Privacy</a><a href="#">Terms</a></div>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+  <script>
+    function renderCart() {
+      const cart = getCart();
+      const container = document.getElementById('cartContainer');
+      if (!cart.length) {
+        container.innerHTML = `
+          <div class="empty-cart">
+            <div class="empty-icon" aria-hidden="true">🛒</div>
+            <h2 style="font-family:var(--font-display); font-size:1.5rem; margin-bottom:12px;">Your cart is empty</h2>
+            <p class="text-muted" style="margin-bottom:28px;">Looks like you haven't added anything yet. Explore our store!</p>
+            <a href="shop.html" class="btn btn-primary">Continue Shopping &rarr;</a>
+          </div>`;
+        return;
+      }
+
+      let subtotal = cart.reduce((s,i) => s + i.price*i.qty, 0);
+      let shipping = subtotal > 500 ? 0 : 25;
+      let total = subtotal + shipping;
+
+      container.innerHTML = `
+        <div class="cart-layout">
+          <div>
+            <div style="background:var(--navy-mid); border:1px solid rgba(255,255,255,0.07); border-radius:var(--radius-lg); overflow:hidden; box-shadow:var(--shadow-card);">
+              <div style="padding:20px 24px; border-bottom:1px solid rgba(255,255,255,0.07); display:flex; justify-content:space-between; align-items:center;">
+                <h2 style="font-family:var(--font-display); font-weight:700; font-size:1.1rem;">${cart.length} Item${cart.length>1?'s':''}</h2>
+                <button onclick="clearCartAll()" style="font-size:0.8rem; color:var(--red); background:none; border:none; cursor:pointer; font-family:var(--font-body);">Clear All</button>
+              </div>
+              <table class="cart-table" aria-label="Cart items">
+                <thead>
+                  <tr>
+                    <th scope="col">Product</th>
+                    <th scope="col">Price</th>
+                    <th scope="col">Qty</th>
+                    <th scope="col">Subtotal</th>
+                    <th scope="col"><span class="sr-only">Actions</span></th>
+                  </tr>
+                </thead>
+                <tbody id="cartBody">
+                  ${cart.map(item => `
+                    <tr data-id="${item.id}" data-price="${item.price}">
+                      <td>
+                        <div style="display:flex;align-items:center;gap:14px;">
+                          <img class="cart-item-img" src="${item.img||'https://images.unsplash.com/photo-1593642632559-0c6d3fc62b89?w=100'}" alt="${item.name}" />
+                          <div>
+                            <div style="font-weight:600; font-size:0.9rem;">${item.name}</div>
+                            <div class="text-muted text-small">In stock</div>
+                          </div>
+                        </div>
+                      </td>
+                      <td>GH₵ ${item.price.toLocaleString()}</td>
+                      <td>
+                        <div class="qty-control">
+                          <button class="qty-btn" data-action="dec" aria-label="Decrease quantity">−</button>
+                          <span class="qty-num" aria-label="Quantity">${item.qty}</span>
+                          <button class="qty-btn" data-action="inc" aria-label="Increase quantity">+</button>
+                        </div>
+                      </td>
+                      <td class="item-subtotal">GH₵ ${(item.price*item.qty).toFixed(2)}</td>
+                      <td><button class="remove-btn" onclick="removeItem('${item.id}')" aria-label="Remove ${item.name} from cart">🗑</button></td>
+                    </tr>
+                  `).join('')}
+                </tbody>
+              </table>
+              <div style="padding:16px 24px; border-top:1px solid rgba(255,255,255,0.07);">
+                <a href="shop.html" class="btn btn-secondary btn-sm">&larr; Continue Shopping</a>
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <div class="order-summary" aria-label="Order summary">
+              <h2 style="font-family:var(--font-display); font-weight:700; font-size:1.1rem; margin-bottom:16px;">Order Summary</h2>
+              <div class="order-row"><span>Subtotal</span><span id="subtotalEl">GH₵ ${subtotal.toFixed(2)}</span></div>
+              <div class="order-row"><span>Shipping</span><span id="shippingEl">${shipping===0?'FREE':'GH₵ '+shipping.toFixed(2)}</span></div>
+              <div class="order-row"><span class="text-muted text-small">Estimated Tax</span><span class="text-muted text-small">GH₵ 0.00</span></div>
+              <div class="order-row total"><span>Total</span><span class="price" id="totalEl">GH₵ ${total.toFixed(2)}</span></div>
+
+              <a href="checkout.html" class="btn btn-primary" style="width:100%; justify-content:center; margin-top:20px; font-size:1rem; padding:14px;">
+                Proceed to Checkout &rarr;
+              </a>
+              <p class="text-small text-muted text-center mt-16">🔒 Secure checkout &bull; Free returns within 14 days</p>
+
+              <div style="margin-top:20px; padding-top:20px; border-top:1px solid rgba(255,255,255,0.07);">
+                <div style="font-size:0.8rem; color:var(--gray-400); margin-bottom:8px;">We Accept</div>
+                <div class="payment-icons">💳 Visa &bull; Mastercard &bull; MTN MoMo &bull; Vodafone Cash</div>
+              </div>
+            </div>
+
+            <!-- Promo code -->
+            <div style="margin-top:16px; background:var(--navy-mid); border:1px solid rgba(255,255,255,0.07); border-radius:var(--radius-lg); padding:20px; box-shadow:var(--shadow-card);">
+              <h3 style="font-size:0.9rem; font-weight:600; margin-bottom:12px;">Promo Code</h3>
+              <div style="display:flex; gap:8px;">
+                <input type="text" class="form-input" placeholder="Enter code e.g. TECHNOVA10" aria-label="Promo code" id="promoInput" style="flex:1;" />
+                <button class="btn btn-secondary btn-sm" onclick="applyPromo()" style="white-space:nowrap;">Apply</button>
+              </div>
+            </div>
+          </div>
+        </div>`;
+
+      // Re-attach qty button events
+      document.querySelectorAll('.qty-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const row = btn.closest('tr');
+          const qtyEl = row.querySelector('.qty-num');
+          let qty = parseInt(qtyEl.textContent);
+          if (btn.dataset.action === 'inc') qty++;
+          else if (btn.dataset.action === 'dec' && qty > 1) qty--;
+          qtyEl.textContent = qty;
+          const price = parseFloat(row.dataset.price);
+          row.querySelector('.item-subtotal').textContent = 'GH₵ ' + (price*qty).toFixed(2);
+          updateCartTotalsLocal();
+          // sync localStorage
+          const cart = getCart();
+          const id = row.dataset.id;
+          const item = cart.find(i => i.id === id);
+          if (item) { item.qty = qty; saveCart(cart); }
+        });
+      });
+    }
+
+    function updateCartTotalsLocal() {
+      let sub = 0;
+      document.querySelectorAll('#cartBody tr').forEach(row => {
+        const qty = parseInt(row.querySelector('.qty-num')?.textContent || 0);
+        const price = parseFloat(row.dataset.price || 0);
+        sub += qty * price;
+      });
+      const shipping = sub > 500 ? 0 : 25;
+      const total = sub + shipping;
+      const el = id => document.getElementById(id);
+      if (el('subtotalEl')) el('subtotalEl').textContent = 'GH₵ ' + sub.toFixed(2);
+      if (el('shippingEl')) el('shippingEl').textContent = shipping === 0 ? 'FREE' : 'GH₵ ' + shipping.toFixed(2);
+      if (el('totalEl')) el('totalEl').textContent = 'GH₵ ' + total.toFixed(2);
+    }
+
+    function removeItem(id) {
+      let cart = getCart();
+      cart = cart.filter(i => i.id !== id);
+      saveCart(cart);
+      showToast('Item removed from cart.');
+      renderCart();
+    }
+
+    function clearCartAll() {
+      saveCart([]);
+      showToast('Cart cleared.');
+      renderCart();
+    }
+
+    function applyPromo() {
+      const code = document.getElementById('promoInput')?.value.trim().toUpperCase();
+      if (code === 'TECHNOVA10') showToast('✅ Promo applied! 10% discount added.', 'success');
+      else showToast('Invalid promo code. Try TECHNOVA10.');
+    }
+
+    renderCart();
+  </script>
+</body>
+</html>
