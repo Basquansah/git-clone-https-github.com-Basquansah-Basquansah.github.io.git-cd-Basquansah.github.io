@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="About TechNova Store – Our story, mission, and the team behind Ghana's premier tech retailer." />
+  <title>About Us | TechNova Store</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%232563eb'/><text y='24' font-size='20' fill='white'>⚡</text></svg>" />
+</head>
+<body>
+
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+
+  <nav class="navbar" role="navigation" aria-label="Main navigation">
+    <a href="index.html" class="nav-logo" aria-label="TechNova Store Home">
+      <div class="logo-icon" aria-hidden="true">⚡</div>Tech<span>Nova</span>
+    </a>
+    <button class="hamburger" aria-expanded="false" aria-controls="nav-links" aria-label="Toggle navigation menu">
+      <span></span><span></span><span></span>
+    </button>
+    <ul class="nav-links" id="nav-links" role="list">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="shop.html">Shop</a></li>
+      <li><a href="about.html" class="active" aria-current="page">About</a></li>
+      <li><a href="contact.html">Contact</a></li>
+      <li><a href="cart.html">Cart</a></li>
+    </ul>
+    <div class="nav-right">
+      <div class="search-bar" role="search" aria-label="Search products">
+        <input type="search" placeholder="Search products…" aria-label="Search products" />
+        <button type="button" aria-label="Submit search">🔍</button>
+      </div>
+      <button class="nav-icon-btn" id="contrastToggle" title="Toggle high contrast" aria-label="Toggle high contrast mode">🔆</button>
+      <button class="nav-icon-btn" id="fontSizeToggle" title="Change font size" aria-label="Change font size">Aa</button>
+      <a href="cart.html" class="nav-icon-btn" aria-label="Shopping cart">🛒<span class="cart-badge">0</span></a>
+    </div>
+  </nav>
+
+  <div class="page-search-bar" role="search" aria-label="Search content on this page">
+    <label for="pageSearchInput">Find on page:</label>
+    <input type="search" id="pageSearchInput" placeholder="Highlight text on page…" aria-label="Search page content" />
+    <span class="match-count" id="matchCount" aria-live="polite" aria-atomic="true"></span>
+    <button id="prevMatch" aria-label="Previous match">↑ Prev</button>
+    <button id="nextMatch" aria-label="Next match">↓ Next</button>
+    <button id="clearSearch" aria-label="Clear search">✕</button>
+  </div>
+
+  <main id="main-content" id="searchable-content">
+
+    <!-- About Hero -->
+    <div class="about-hero" style="padding-top: 120px;">
+      <div class="breadcrumb" aria-label="Breadcrumb">
+        <a href="index.html">Home</a>
+        <span class="breadcrumb-sep" aria-hidden="true">›</span>
+        <span aria-current="page">About Us</span>
+      </div>
+      <div class="about-hero-content">
+        <div class="section-tag">Our Story</div>
+        <h1 class="section-title">Powering Ghana's<br />Digital Future</h1>
+        <p class="section-subtitle" style="max-width:600px;">
+          Founded in Accra in 2019, TechNova Store was built on a simple belief: every Ghanaian deserves access to world-class technology — at fair prices, with exceptional service. We started as a small shop in Osu and have grown into Ghana's most trusted online tech retailer, serving over 12,000 customers nationwide.
+        </p>
+        <div style="display:flex; gap:14px; margin-top:32px; flex-wrap:wrap;">
+          <a href="shop.html" class="btn btn-primary">Shop Now &rarr;</a>
+          <a href="contact.html" class="btn btn-secondary">Get in Touch</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Story image banner -->
+    <div style="margin: 0; overflow:hidden; height: 380px; position:relative;">
+      <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?w=1600&q=80"
+           alt="TechNova team working in a modern tech office environment"
+           style="width:100%; height:100%; object-fit:cover; opacity:0.7;" loading="lazy" />
+      <div style="position:absolute; inset:0; background: linear-gradient(to bottom, var(--navy) 0%, transparent 30%, transparent 70%, var(--navy) 100%);"></div>
+    </div>
+
+    <!-- Mission & Vision -->
+    <section class="section" aria-labelledby="mission-heading">
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:48px; align-items:center;" class="mission-grid">
+        <div>
+          <div class="section-tag">Mission</div>
+          <h2 class="section-title" id="mission-heading">Why We Exist</h2>
+          <p style="color:var(--gray-300); line-height:1.8; margin-bottom:16px;">
+            We exist to democratise access to technology in Ghana. For too long, premium tech products were either unavailable locally, overpriced, or sold without genuine warranties. TechNova changed that.
+          </p>
+          <p style="color:var(--gray-300); line-height:1.8; margin-bottom:24px;">
+            Our mission is to be the most customer-centric technology retailer in West Africa — delivering authentic products, honest advice, and after-sales support that actually works.
+          </p>
+          <a href="shop.html" class="btn btn-primary">Explore Our Products &rarr;</a>
+        </div>
+        <div>
+          <img src="https://images.unsplash.com/photo-1551434678-e076c223a692?w=700&q=80"
+               alt="Team members collaborating on a laptop in an office"
+               style="border-radius: var(--radius-lg); box-shadow: var(--shadow-card);" loading="lazy" />
+        </div>
+      </div>
+    </section>
+
+    <div class="divider" aria-hidden="true"></div>
+
+    <!-- Our Values -->
+    <section class="section" aria-labelledby="values-heading">
+      <div class="section-tag">What We Stand For</div>
+      <h2 class="section-title" id="values-heading">Our Core Values</h2>
+      <div class="values-grid" role="list">
+        <article class="value-card" role="listitem">
+          <div class="value-num" aria-hidden="true">01</div>
+          <h3 class="value-title">Authenticity</h3>
+          <p class="value-desc">Every product we sell is 100% genuine, sourced directly from manufacturers or authorised distributors. No counterfeits — ever.</p>
+        </article>
+        <article class="value-card" role="listitem">
+          <div class="value-num" aria-hidden="true">02</div>
+          <h3 class="value-title">Customer First</h3>
+          <p class="value-desc">From browsing to post-purchase support, every decision we make puts the customer experience at the centre.</p>
+        </article>
+        <article class="value-card" role="listitem">
+          <div class="value-num" aria-hidden="true">03</div>
+          <h3 class="value-title">Innovation</h3>
+          <p class="value-desc">We continuously improve our platform, logistics, and services to stay ahead — so our customers always get the best.</p>
+        </article>
+        <article class="value-card" role="listitem">
+          <div class="value-num" aria-hidden="true">04</div>
+          <h3 class="value-title">Local Roots</h3>
+          <p class="value-desc">We are proudly Ghanaian. We accept Mobile Money, offer local language support, and give back to our community.</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- Milestones -->
+    <section class="section" style="background: var(--navy-mid);" aria-labelledby="milestones-heading">
+      <div class="section-tag">Journey</div>
+      <h2 class="section-title" id="milestones-heading">Our Milestones</h2>
+      <div style="display:flex; flex-direction:column; gap:24px; margin-top:32px; max-width:700px;">
+        <div style="display:flex; gap:20px; align-items:flex-start;">
+          <div style="min-width:80px; font-family:var(--font-display); font-weight:800; color:var(--blue-glow); font-size:1.1rem;">2019</div>
+          <div>
+            <strong>Founded in Accra</strong>
+            <p class="text-muted text-small" style="margin-top:4px;">Opened our first physical store in Osu with a team of 3 and 50 products.</p>
+          </div>
+        </div>
+        <div style="display:flex; gap:20px; align-items:flex-start;">
+          <div style="min-width:80px; font-family:var(--font-display); font-weight:800; color:var(--blue-glow); font-size:1.1rem;">2020</div>
+          <div>
+            <strong>Went Online</strong>
+            <p class="text-muted text-small" style="margin-top:4px;">Launched our e-commerce platform during the pandemic, reaching customers across all 16 regions of Ghana.</p>
+          </div>
+        </div>
+        <div style="display:flex; gap:20px; align-items:flex-start;">
+          <div style="min-width:80px; font-family:var(--font-display); font-weight:800; color:var(--blue-glow); font-size:1.1rem;">2021</div>
+          <div>
+            <strong>Mobile Money Integration</strong>
+            <p class="text-muted text-small" style="margin-top:4px;">Became one of the first tech retailers to fully integrate MTN, Vodafone, and AirtelTigo Mobile Money payments.</p>
+          </div>
+        </div>
+        <div style="display:flex; gap:20px; align-items:flex-start;">
+          <div style="min-width:80px; font-family:var(--font-display); font-weight:800; color:var(--blue-glow); font-size:1.1rem;">2023</div>
+          <div>
+            <strong>10,000 Customers</strong>
+            <p class="text-muted text-small" style="margin-top:4px;">Celebrated serving our 10,000th customer. Expanded to 500+ products and launched our Trade-In programme.</p>
+          </div>
+        </div>
+        <div style="display:flex; gap:20px; align-items:flex-start;">
+          <div style="min-width:80px; font-family:var(--font-display); font-weight:800; color:var(--blue-glow); font-size:1.1rem;">2025</div>
+          <div>
+            <strong>West Africa Expansion</strong>
+            <p class="text-muted text-small" style="margin-top:4px;">Announced plans to expand into Nigeria, Côte d'Ivoire, and Senegal, establishing TechNova as a regional brand.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="divider" aria-hidden="true"></div>
+
+    <!-- Team -->
+    <section class="section" aria-labelledby="team-heading">
+      <div class="section-tag">The People</div>
+      <h2 class="section-title" id="team-heading">Meet Our Team</h2>
+      <p class="section-subtitle">A passionate group of technologists, entrepreneurs, and customer champions dedicated to bringing the best of tech to Ghana.</p>
+
+      <div class="team-grid" role="list">
+        <article class="team-card" role="listitem">
+          <img class="team-avatar" src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&q=80" alt="Kwame Asante, CEO and Co-Founder" loading="lazy" />
+          <div class="team-name">Kwame Asante</div>
+          <div class="team-role">CEO &amp; Co-Founder</div>
+        </article>
+        <article class="team-card" role="listitem">
+          <img class="team-avatar" src="https://images.unsplash.com/photo-1494790108755-2616b612b786?w=200&q=80" alt="Ama Boateng, CTO" loading="lazy" />
+          <div class="team-name">Ama Boateng</div>
+          <div class="team-role">CTO</div>
+        </article>
+        <article class="team-card" role="listitem">
+          <img class="team-avatar" src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=200&q=80" alt="Kofi Mensah, Head of Operations" loading="lazy" />
+          <div class="team-name">Kofi Mensah</div>
+          <div class="team-role">Head of Operations</div>
+        </article>
+        <article class="team-card" role="listitem">
+          <img class="team-avatar" src="https://images.unsplash.com/photo-1580489944761-15a19d654956?w=200&q=80" alt="Abena Owusu, Head of Customer Experience" loading="lazy" />
+          <div class="team-name">Abena Owusu</div>
+          <div class="team-role">Head of Customer Experience</div>
+        </article>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="section" style="background:linear-gradient(135deg, rgba(37,99,235,0.12),transparent); text-align:center;" aria-labelledby="cta-heading">
+      <h2 class="section-title" id="cta-heading">Ready to Upgrade Your Tech?</h2>
+      <p class="section-subtitle" style="margin:0 auto 32px;">Browse over 500 genuine products with fast delivery across Ghana.</p>
+      <a href="shop.html" class="btn btn-primary" style="font-size:1rem; padding:14px 36px;">Shop Now &rarr;</a>
+    </section>
+
+  </main>
+
+  <footer role="contentinfo">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="index.html" class="nav-logo" style="display:inline-flex"><div class="logo-icon" aria-hidden="true">⚡</div>Tech<span>Nova</span></a>
+        <p>Ghana's trusted online tech store — premium gadgets delivered to your door.</p>
+      </div>
+      <div><h3 class="footer-col-title">Shop</h3><ul class="footer-links"><li><a href="shop.html">All Products</a></li><li><a href="shop.html">Laptops</a></li><li><a href="shop.html">Phones</a></li></ul></div>
+      <div><h3 class="footer-col-title">Company</h3><ul class="footer-links"><li><a href="about.html">About Us</a></li><li><a href="contact.html">Contact</a></li></ul></div>
+      <div><h3 class="footer-col-title">Support</h3><ul class="footer-links"><li><a href="#">FAQ</a></li><li><a href="#">Returns</a></li><li><a href="#">Track Order</a></li></ul></div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2025 TechNova Store. All rights reserved. 🇬🇭</p>
+      <div class="footer-bottom-links"><a href="#">Privacy</a><a href="#">Terms</a></div>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+  <style>
+    @media(max-width:768px){ .mission-grid{ grid-template-columns:1fr !important; } }
+  </style>
+</body>
+</html>
