@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Shop TechNova Store – Browse laptops, smartphones, audio, accessories and more. Fast delivery across Ghana." />
+  <title>Shop | TechNova Store</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%232563eb'/><text y='24' font-size='20' fill='white'>⚡</text></svg>" />
+  <style>
+    .shop-layout { display: grid; grid-template-columns: 260px 1fr; gap: 32px; align-items: start; }
+    .sidebar { background: var(--navy-mid); border: 1px solid rgba(255,255,255,0.07); border-radius: var(--radius-lg); padding: 24px; position: sticky; top: 110px; box-shadow: var(--shadow-card); }
+    .sidebar-title { font-family: var(--font-display); font-weight: 700; font-size: 1rem; margin-bottom: 16px; color: var(--white); }
+    .sidebar-section { margin-bottom: 28px; border-bottom: 1px solid rgba(255,255,255,0.06); padding-bottom: 24px; }
+    .sidebar-section:last-child { border-bottom: none; margin-bottom: 0; }
+    .filter-label { display: flex; align-items: center; gap: 10px; font-size: 0.875rem; color: var(--gray-300); margin-bottom: 10px; cursor: pointer; transition: color var(--transition); }
+    .filter-label input[type=checkbox] { width: 16px; height: 16px; accent-color: var(--blue); cursor: pointer; }
+    .filter-label:hover { color: var(--white); }
+    .price-range { width: 100%; accent-color: var(--blue); }
+    .price-display { display: flex; justify-content: space-between; font-size: 0.8rem; color: var(--gray-400); margin-top: 8px; }
+    .sort-bar { display: flex; align-items: center; justify-content: space-between; margin-bottom: 24px; gap: 12px; flex-wrap: wrap; }
+    .results-count { font-size: 0.875rem; color: var(--gray-400); }
+    .sort-select { background: var(--navy-mid); border: 1px solid rgba(255,255,255,0.1); border-radius: var(--radius-sm); color: var(--white); font-family: var(--font-body); font-size: 0.875rem; padding: 8px 12px; outline: none; cursor: pointer; }
+    @media(max-width:768px){ .shop-layout{ grid-template-columns: 1fr; } .sidebar{ position: static; } }
+  </style>
+</head>
+<body>
+
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+
+  <nav class="navbar" role="navigation" aria-label="Main navigation">
+    <a href="index.html" class="nav-logo" aria-label="TechNova Store Home">
+      <div class="logo-icon" aria-hidden="true">⚡</div>
+      Tech<span>Nova</span>
+    </a>
+    <button class="hamburger" aria-expanded="false" aria-controls="nav-links" aria-label="Toggle navigation menu">
+      <span></span><span></span><span></span>
+    </button>
+    <ul class="nav-links" id="nav-links" role="list">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="shop.html" class="active" aria-current="page">Shop</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="contact.html">Contact</a></li>
+      <li><a href="cart.html">Cart</a></li>
+    </ul>
+    <div class="nav-right">
+      <div class="search-bar" role="search" aria-label="Search products">
+        <input type="search" placeholder="Search products…" aria-label="Search products" id="shopSearchNav" />
+        <button type="button" aria-label="Submit search" onclick="filterProducts()">🔍</button>
+      </div>
+      <button class="nav-icon-btn" id="contrastToggle" title="Toggle high contrast" aria-label="Toggle high contrast mode">🔆</button>
+      <button class="nav-icon-btn" id="fontSizeToggle" title="Change font size" aria-label="Change font size">Aa</button>
+      <a href="cart.html" class="nav-icon-btn" aria-label="Shopping cart">🛒<span class="cart-badge">0</span></a>
+    </div>
+  </nav>
+
+  <div class="page-search-bar" role="search" aria-label="Search content on this page">
+    <label for="pageSearchInput">Find on page:</label>
+    <input type="search" id="pageSearchInput" placeholder="Highlight text on page…" aria-label="Search page content" />
+    <span class="match-count" id="matchCount" aria-live="polite" aria-atomic="true"></span>
+    <button id="prevMatch" aria-label="Previous match">↑ Prev</button>
+    <button id="nextMatch" aria-label="Next match">↓ Next</button>
+    <button id="clearSearch" aria-label="Clear search">✕</button>
+  </div>
+
+  <!-- Page Hero -->
+  <div class="page-hero">
+    <div class="breadcrumb" aria-label="Breadcrumb">
+      <a href="index.html">Home</a>
+      <span class="breadcrumb-sep" aria-hidden="true">›</span>
+      <span aria-current="page">Shop</span>
+    </div>
+    <div class="section-tag">Our Collection</div>
+    <h1 class="section-title">Shop All Products</h1>
+    <p class="section-subtitle">Over 500 genuine tech products — laptops, phones, audio, gaming, and more. All available for fast delivery across Ghana.</p>
+  </div>
+
+  <main id="main-content">
+    <div class="section" style="padding-top: 32px;" id="searchable-content">
+
+      <!-- Category pills -->
+      <div class="category-strip" role="tablist" aria-label="Filter by category">
+        <button class="cat-pill active" data-cat="all" role="tab" aria-selected="true">All</button>
+        <button class="cat-pill" data-cat="laptops" role="tab" aria-selected="false">💻 Laptops</button>
+        <button class="cat-pill" data-cat="phones" role="tab" aria-selected="false">📱 Phones</button>
+        <button class="cat-pill" data-cat="audio" role="tab" aria-selected="false">🎧 Audio</button>
+        <button class="cat-pill" data-cat="accessories" role="tab" aria-selected="false">⌨️ Accessories</button>
+        <button class="cat-pill" data-cat="gaming" role="tab" aria-selected="false">🎮 Gaming</button>
+        <button class="cat-pill" data-cat="tablets" role="tab" aria-selected="false">📟 Tablets</button>
+      </div>
+
+      <div class="shop-layout">
+
+        <!-- Sidebar Filters -->
+        <aside aria-label="Product filters">
+          <div class="sidebar">
+            <h2 class="sidebar-title">Filters</h2>
+
+            <div class="sidebar-section">
+              <h3 class="sidebar-title" style="font-size:0.875rem; margin-bottom:12px;">Brand</h3>
+              <label class="filter-label"><input type="checkbox" aria-label="Filter by Apple" /> Apple</label>
+              <label class="filter-label"><input type="checkbox" aria-label="Filter by Samsung" /> Samsung</label>
+              <label class="filter-label"><input type="checkbox" aria-label="Filter by Dell" /> Dell</label>
+              <label class="filter-label"><input type="checkbox" aria-label="Filter by HP" /> HP</label>
+              <label class="filter-label"><input type="checkbox" aria-label="Filter by Sony" /> Sony</label>
+              <label class="filter-label"><input type="checkbox" aria-label="Filter by Lenovo" /> Lenovo</label>
+              <label class="filter-label"><input type="checkbox" aria-label="Filter by ASUS" /> ASUS</label>
+            </div>
+
+            <div class="sidebar-section">
+              <h3 class="sidebar-title" style="font-size:0.875rem; margin-bottom:12px;">Price Range (GH₵)</h3>
+              <input type="range" class="price-range" min="100" max="15000" value="15000" step="100"
+                     aria-label="Maximum price filter" id="priceRange" oninput="updatePriceDisplay(this.value)" />
+              <div class="price-display">
+                <span>GH₵ 100</span>
+                <span id="priceMax">GH₵ 15,000</span>
+              </div>
+            </div>
+
+            <div class="sidebar-section">
+              <h3 class="sidebar-title" style="font-size:0.875rem; margin-bottom:12px;">Rating</h3>
+              <label class="filter-label"><input type="checkbox" aria-label="Filter 5 star products" /> ★★★★★ (5 stars)</label>
+              <label class="filter-label"><input type="checkbox" aria-label="Filter 4 star products" /> ★★★★☆ (4+ stars)</label>
+              <label class="filter-label"><input type="checkbox" aria-label="Filter 3 star products" /> ★★★☆☆ (3+ stars)</label>
+            </div>
+
+            <div class="sidebar-section">
+              <h3 class="sidebar-title" style="font-size:0.875rem; margin-bottom:12px;">Availability</h3>
+              <label class="filter-label"><input type="checkbox" checked aria-label="Show in-stock items" /> In Stock</label>
+              <label class="filter-label"><input type="checkbox" aria-label="Show pre-order items" /> Pre-Order</label>
+            </div>
+
+            <button class="btn btn-secondary" style="width:100%; justify-content:center; margin-top:8px;" onclick="showToast('Filters applied','success')">Apply Filters</button>
+          </div>
+        </aside>
+
+        <!-- Products -->
+        <div>
+          <div class="sort-bar">
+            <span class="results-count" aria-live="polite">Showing <strong>12</strong> products</span>
+            <select class="sort-select" aria-label="Sort products by">
+              <option>Sort: Popularity</option>
+              <option>Price: Low to High</option>
+              <option>Price: High to Low</option>
+              <option>Newest First</option>
+              <option>Best Rating</option>
+            </select>
+          </div>
+
+          <div class="product-grid" role="list">
+
+            <!-- 1 -->
+            <div class="product-col" role="listitem">
+              <article class="product-card" data-cat="laptops">
+                <div class="product-img-wrap">
+                  <img src="https://images.unsplash.com/photo-1593642632559-0c6d3fc62b89?w=600&q=80" alt="Dell XPS 15 laptop" loading="lazy" />
+                  <span class="product-badge">Bestseller</span>
+                  <div class="product-actions-overlay">
+                    <button class="btn btn-sm btn-primary" onclick="addToCart('laptop-001','Dell XPS 15',8999,'https://images.unsplash.com/photo-1593642632559-0c6d3fc62b89?w=200')">Add to Cart</button>
+                  </div>
+                </div>
+                <div class="product-body">
+                  <div class="product-category">Laptops</div>
+                  <h3 class="product-name">Dell XPS 15 (12th Gen)</h3>
+                  <div class="product-rating" aria-label="4.8 stars, 312 reviews"><span class="stars" aria-hidden="true">★★★★★</span><span class="rating-count">(312)</span></div>
+                  <div class="product-price-row"><span class="product-price">GH₵ 8,999</span><span class="product-price-old">GH₵ 10,500</span><button class="product-add-btn" onclick="addToCart('laptop-001','Dell XPS 15',8999,'https://images.unsplash.com/photo-1593642632559-0c6d3fc62b89?w=200')" aria-label="Add to cart">+</button></div>
+                </div>
+              </article>
+            </div>
+
+            <!-- 2 -->
+            <div class="product-col" role="listitem">
+              <article class="product-card" data-cat="phones">
+                <div class="product-img-wrap">
+                  <img src="https://images.unsplash.com/photo-1610945415295-d9bbf067e59c?w=600&q=80" alt="Samsung Galaxy S24 Ultra" loading="lazy" />
+                  <span class="product-badge new">New</span>
+                  <div class="product-actions-overlay">
+                    <button class="btn btn-sm btn-primary" onclick="addToCart('phone-001','Samsung S24 Ultra',7499,'')">Add to Cart</button>
+                  </div>
+                </div>
+                <div class="product-body">
+                  <div class="product-category">Smartphones</div>
+                  <h3 class="product-name">Samsung Galaxy S24 Ultra</h3>
+                  <div class="product-rating" aria-label="4.9 stars, 580 reviews"><span class="stars" aria-hidden="true">★★★★★</span><span class="rating-count">(580)</span></div>
+                  <div class="product-price-row"><span class="product-price">GH₵ 7,499</span><button class="product-add-btn" onclick="addToCart('phone-001','Samsung S24 Ultra',7499,'')" aria-label="Add to cart">+</button></div>
+                </div>
+              </article>
+            </div>
+
+            <!-- 3 -->
+            <div class="product-col" role="listitem">
+              <article class="product-card" data-cat="audio">
+                <div class="product-img-wrap">
+                  <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=600&q=80" alt="Sony WH-1000XM5 headphones" loading="lazy" />
+                  <span class="product-badge sale">Sale</span>
+                  <div class="product-actions-overlay">
+                    <button class="btn btn-sm btn-primary" onclick="addToCart('audio-001','Sony WH-1000XM5',1299,'')">Add to Cart</button>
+                  </div>
+                </div>
+                <div class="product-body">
+                  <div class="product-category">Audio</div>
+                  <h3 class="product-name">Sony WH-1000XM5</h3>
+                  <div class="product-rating" aria-label="4.8 stars, 241 reviews"><span class="stars" aria-hidden="true">★★★★★</span><span class="rating-count">(241)</span></div>
+                  <div class="product-price-row"><span class="product-price">GH₵ 1,299</span><span class="product-price-old">GH₵ 1,699</span><button class="product-add-btn" onclick="addToCart('audio-001','Sony WH-1000XM5',1299,'')" aria-label="Add to cart">+</button></div>
+                </div>
+              </article>
+            </div>
+
+            <!-- 4 -->
+            <div class="product-col" role="listitem">
+              <article class="product-card" data-cat="accessories">
+                <div class="product-img-wrap">
+                  <img src="https://images.unsplash.com/photo-1546868871-7041f2a55e12?w=600&q=80" alt="Apple Watch Series 9" loading="lazy" />
+                  <div class="product-actions-overlay">
+                    <button class="btn btn-sm btn-primary" onclick="addToCart('acc-001','Apple Watch S9',2999,'')">Add to Cart</button>
+                  </div>
+                </div>
+                <div class="product-body">
+                  <div class="product-category">Wearables</div>
+                  <h3 class="product-name">Apple Watch Series 9</h3>
+                  <div class="product-rating" aria-label="4.7 stars, 189 reviews"><span class="stars" aria-hidden="true">★★★★☆</span><span class="rating-count">(189)</span></div>
+                  <div class="product-price-row"><span class="product-price">GH₵ 2,999</span><button class="product-add-btn" onclick="addToCart('acc-001','Apple Watch S9',2999,'')" aria-label="Add to cart">+</button></div>
+                </div>
+              </article>
+            </div>
+
+            <!-- 5 -->
+            <div class="product-col" role="listitem">
+              <article class="product-card" data-cat="laptops">
+                <div class="product-img-wrap">
+                  <img src="https://images.unsplash.com/photo-1496181133206-80ce9b88a853?w=600&q=80" alt="MacBook Pro 14 inch" loading="lazy" />
+                  <span class="product-badge">Hot</span>
+                  <div class="product-actions-overlay">
+                    <button class="btn btn-sm btn-primary" onclick="addToCart('laptop-002','MacBook Pro 14',12499,'')">Add to Cart</button>
+                  </div>
+                </div>
+                <div class="product-body">
+                  <div class="product-category">Laptops</div>
+                  <h3 class="product-name">MacBook Pro 14" M3</h3>
+                  <div class="product-rating" aria-label="4.9 stars, 421 reviews"><span class="stars" aria-hidden="true">★★★★★</span><span class="rating-count">(421)</span></div>
+                  <div class="product-price-row"><span class="product-price">GH₵ 12,499</span><button class="product-add-btn" onclick="addToCart('laptop-002','MacBook Pro 14',12499,'')" aria-label="Add to cart">+</button></div>
+                </div>
+              </article>
+            </div>
+
+            <!-- 6 -->
+            <div class="product-col" role="listitem">
+              <article class="product-card" data-cat="gaming">
+                <div class="product-img-wrap">
+                  <img src="https://images.unsplash.com/photo-1593640408182-31c228e4d996?w=600&q=80" alt="Gaming setup with RGB keyboard" loading="lazy" />
+                  <span class="product-badge new">New</span>
+                  <div class="product-actions-overlay">
+                    <button class="btn btn-sm btn-primary" onclick="addToCart('game-001','Razer Keyboard',899,'')">Add to Cart</button>
+                  </div>
+                </div>
+                <div class="product-body">
+                  <div class="product-category">Gaming</div>
+                  <h3 class="product-name">Razer BlackWidow V4</h3>
+                  <div class="product-rating" aria-label="4.6 stars, 144 reviews"><span class="stars" aria-hidden="true">★★★★☆</span><span class="rating-count">(144)</span></div>
+                  <div class="product-price-row"><span class="product-price">GH₵ 899</span><button class="product-add-btn" onclick="addToCart('game-001','Razer Keyboard',899,'')" aria-label="Add to cart">+</button></div>
+                </div>
+              </article>
+            </div>
+
+            <!-- 7 -->
+            <div class="product-col" role="listitem">
+              <article class="product-card" data-cat="tablets">
+                <div class="product-img-wrap">
+                  <img src="https://images.unsplash.com/photo-1544244015-0df4b3ffc6b0?w=600&q=80" alt="iPad Pro with Apple Pencil" loading="lazy" />
+                  <div class="product-actions-overlay">
+                    <button class="btn btn-sm btn-primary" onclick="addToCart('tab-001','iPad Pro 12.9',6499,'')">Add to Cart</button>
+                  </div>
+                </div>
+                <div class="product-body">
+                  <div class="product-category">Tablets</div>
+                  <h3 class="product-name">Apple iPad Pro 12.9"</h3>
+                  <div class="product-rating" aria-label="4.8 stars, 298 reviews"><span class="stars" aria-hidden="true">★★★★★</span><span class="rating-count">(298)</span></div>
+                  <div class="product-price-row"><span class="product-price">GH₵ 6,499</span><button class="product-add-btn" onclick="addToCart('tab-001','iPad Pro 12.9',6499,'')" aria-label="Add to cart">+</button></div>
+                </div>
+              </article>
+            </div>
+
+            <!-- 8 -->
+            <div class="product-col" role="listitem">
+              <article class="product-card" data-cat="phones">
+                <div class="product-img-wrap">
+                  <img src="https://images.unsplash.com/photo-1592750475338-74b7b21085ab?w=600&q=80" alt="iPhone 15 Pro Max" loading="lazy" />
+                  <span class="product-badge sale">Sale</span>
+                  <div class="product-actions-overlay">
+                    <button class="btn btn-sm btn-primary" onclick="addToCart('phone-002','iPhone 15 Pro Max',9999,'')">Add to Cart</button>
+                  </div>
+                </div>
+                <div class="product-body">
+                  <div class="product-category">Smartphones</div>
+                  <h3 class="product-name">iPhone 15 Pro Max</h3>
+                  <div class="product-rating" aria-label="4.9 stars, 712 reviews"><span class="stars" aria-hidden="true">★★★★★</span><span class="rating-count">(712)</span></div>
+                  <div class="product-price-row"><span class="product-price">GH₵ 9,999</span><span class="product-price-old">GH₵ 11,500</span><button class="product-add-btn" onclick="addToCart('phone-002','iPhone 15 Pro Max',9999,'')" aria-label="Add to cart">+</button></div>
+                </div>
+              </article>
+            </div>
+
+            <!-- 9 -->
+            <div class="product-col" role="listitem">
+              <article class="product-card" data-cat="audio">
+                <div class="product-img-wrap">
+                  <img src="https://images.unsplash.com/photo-1608043152269-423dbba4e7e1?w=600&q=80" alt="JBL Charge 5 Bluetooth speaker" loading="lazy" />
+                  <div class="product-actions-overlay">
+                    <button class="btn btn-sm btn-primary" onclick="addToCart('audio-002','JBL Charge 5',649,'')">Add to Cart</button>
+                  </div>
+                </div>
+                <div class="product-body">
+                  <div class="product-category">Audio</div>
+                  <h3 class="product-name">JBL Charge 5 Speaker</h3>
+                  <div class="product-rating" aria-label="4.7 stars, 336 reviews"><span class="stars" aria-hidden="true">★★★★☆</span><span class="rating-count">(336)</span></div>
+                  <div class="product-price-row"><span class="product-price">GH₵ 649</span><button class="product-add-btn" onclick="addToCart('audio-002','JBL Charge 5',649,'')" aria-label="Add to cart">+</button></div>
+                </div>
+              </article>
+            </div>
+
+            <!-- 10 -->
+            <div class="product-col" role="listitem">
+              <article class="product-card" data-cat="accessories">
+                <div class="product-img-wrap">
+                  <img src="https://images.unsplash.com/photo-1527864550417-7fd91fc51a46?w=600&q=80" alt="Mechanical keyboard" loading="lazy" />
+                  <div class="product-actions-overlay">
+                    <button class="btn btn-sm btn-primary" onclick="addToCart('acc-002','Mechanical Keyboard',450,'')">Add to Cart</button>
+                  </div>
+                </div>
+                <div class="product-body">
+                  <div class="product-category">Accessories</div>
+                  <h3 class="product-name">Keychron K2 Wireless</h3>
+                  <div class="product-rating" aria-label="4.6 stars, 211 reviews"><span class="stars" aria-hidden="true">★★★★☆</span><span class="rating-count">(211)</span></div>
+                  <div class="product-price-row"><span class="product-price">GH₵ 450</span><button class="product-add-btn" onclick="addToCart('acc-002','Mechanical Keyboard',450,'')" aria-label="Add to cart">+</button></div>
+                </div>
+              </article>
+            </div>
+
+            <!-- 11 -->
+            <div class="product-col" role="listitem">
+              <article class="product-card" data-cat="laptops">
+                <div class="product-img-wrap">
+                  <img src="https://images.unsplash.com/photo-1588872657578-7efd1f1555ed?w=600&q=80" alt="HP Spectre x360 laptop" loading="lazy" />
+                  <span class="product-badge">Top Pick</span>
+                  <div class="product-actions-overlay">
+                    <button class="btn btn-sm btn-primary" onclick="addToCart('laptop-003','HP Spectre x360',7199,'')">Add to Cart</button>
+                  </div>
+                </div>
+                <div class="product-body">
+                  <div class="product-category">Laptops</div>
+                  <h3 class="product-name">HP Spectre x360 14</h3>
+                  <div class="product-rating" aria-label="4.7 stars, 167 reviews"><span class="stars" aria-hidden="true">★★★★☆</span><span class="rating-count">(167)</span></div>
+                  <div class="product-price-row"><span class="product-price">GH₵ 7,199</span><button class="product-add-btn" onclick="addToCart('laptop-003','HP Spectre x360',7199,'')" aria-label="Add to cart">+</button></div>
+                </div>
+              </article>
+            </div>
+
+            <!-- 12 -->
+            <div class="product-col" role="listitem">
+              <article class="product-card" data-cat="gaming">
+                <div class="product-img-wrap">
+                  <img src="https://images.unsplash.com/photo-1612287230202-1ff1d85d1bdf?w=600&q=80" alt="Gaming controller" loading="lazy" />
+                  <div class="product-actions-overlay">
+                    <button class="btn btn-sm btn-primary" onclick="addToCart('game-002','Xbox Controller',349,'')">Add to Cart</button>
+                  </div>
+                </div>
+                <div class="product-body">
+                  <div class="product-category">Gaming</div>
+                  <h3 class="product-name">Xbox Wireless Controller</h3>
+                  <div class="product-rating" aria-label="4.8 stars, 522 reviews"><span class="stars" aria-hidden="true">★★★★★</span><span class="rating-count">(522)</span></div>
+                  <div class="product-price-row"><span class="product-price">GH₵ 349</span><button class="product-add-btn" onclick="addToCart('game-002','Xbox Controller',349,'')" aria-label="Add to cart">+</button></div>
+                </div>
+              </article>
+            </div>
+
+          </div><!-- end product-grid -->
+        </div><!-- end products col -->
+      </div><!-- end shop-layout -->
+    </div>
+  </main>
+
+  <footer role="contentinfo">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="index.html" class="nav-logo" style="display:inline-flex"><div class="logo-icon" aria-hidden="true">⚡</div>Tech<span>Nova</span></a>
+        <p>Ghana's trusted online tech store — premium gadgets delivered to your door.</p>
+      </div>
+      <div><h3 class="footer-col-title">Shop</h3><ul class="footer-links"><li><a href="shop.html">All Products</a></li><li><a href="shop.html">Laptops</a></li><li><a href="shop.html">Phones</a></li><li><a href="shop.html">Audio</a></li></ul></div>
+      <div><h3 class="footer-col-title">Company</h3><ul class="footer-links"><li><a href="about.html">About Us</a></li><li><a href="contact.html">Contact</a></li></ul></div>
+      <div><h3 class="footer-col-title">Support</h3><ul class="footer-links"><li><a href="#">FAQ</a></li><li><a href="#">Returns</a></li><li><a href="#">Track Order</a></li></ul></div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2025 TechNova Store. All rights reserved. 🇬🇭</p>
+      <div class="footer-bottom-links"><a href="#">Privacy</a><a href="#">Terms</a></div>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+  <script>
+    function updatePriceDisplay(val) {
+      document.getElementById('priceMax').textContent = 'GH₵ ' + parseInt(val).toLocaleString();
+    }
+    function filterProducts() {
+      const q = document.getElementById('shopSearchNav').value.trim().toLowerCase();
+      document.querySelectorAll('.product-col').forEach(col => {
+        const name = col.querySelector('.product-name')?.textContent.toLowerCase() || '';
+        const cat  = col.querySelector('.product-category')?.textContent.toLowerCase() || '';
+        col.style.display = (!q || name.includes(q) || cat.includes(q)) ? '' : 'none';
+      });
+    }
+  </script>
+</body>
+</html>
