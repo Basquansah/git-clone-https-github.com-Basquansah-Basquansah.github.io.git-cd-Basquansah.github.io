@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Secure checkout – TechNova Store Ghana." />
+  <title>Checkout | TechNova Store</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%232563eb'/><text y='24' font-size='20' fill='white'>⚡</text></svg>" />
+  <style>
+    .checkout-layout { display: grid; grid-template-columns: 1.4fr 1fr; gap: 40px; align-items: start; }
+    .step-indicator { display:flex; gap:0; margin-bottom:36px; }
+    .step { flex:1; text-align:center; position:relative; }
+    .step::after { content:''; position:absolute; top:16px; left:50%; width:100%; height:2px; background:rgba(255,255,255,0.1); z-index:0; }
+    .step:last-child::after { display:none; }
+    .step-circle { width:32px; height:32px; border-radius:50%; background:var(--navy-light); border:2px solid rgba(255,255,255,0.15); display:flex; align-items:center; justify-content:center; font-size:0.8rem; font-weight:700; margin:0 auto 6px; position:relative; z-index:1; transition:all var(--transition); }
+    .step.active .step-circle { background:var(--blue); border-color:var(--blue); box-shadow:var(--shadow-glow); }
+    .step.done .step-circle { background:var(--green); border-color:var(--green); }
+    .step-label { font-size:0.75rem; color:var(--gray-400); }
+    .step.active .step-label { color:var(--white); }
+    .payment-option { display:flex; align-items:center; gap:12px; padding:14px 16px; border:1px solid rgba(255,255,255,0.1); border-radius:var(--radius-md); cursor:pointer; transition:border-color var(--transition), background var(--transition); margin-bottom:10px; }
+    .payment-option:hover { border-color:var(--blue); background:rgba(37,99,235,0.06); }
+    .payment-option input[type=radio] { accent-color:var(--blue); width:18px; height:18px; }
+    .payment-option.selected { border-color:var(--blue); background:rgba(37,99,235,0.1); }
+    .success-overlay { display:none; position:fixed; inset:0; background:rgba(10,14,26,0.95); z-index:3000; align-items:center; justify-content:center; text-align:center; padding:20px; }
+    .success-overlay.show { display:flex; }
+    @media(max-width:768px){ .checkout-layout{ grid-template-columns:1fr; } }
+  </style>
+</head>
+<body>
+
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+
+  <nav class="navbar" role="navigation" aria-label="Main navigation">
+    <a href="index.html" class="nav-logo" aria-label="TechNova Store Home">
+      <div class="logo-icon" aria-hidden="true">⚡</div>Tech<span>Nova</span>
+    </a>
+    <button class="hamburger" aria-expanded="false" aria-controls="nav-links" aria-label="Toggle navigation menu">
+      <span></span><span></span><span></span>
+    </button>
+    <ul class="nav-links" id="nav-links" role="list">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="shop.html">Shop</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="contact.html">Contact</a></li>
+      <li><a href="cart.html">Cart</a></li>
+    </ul>
+    <div class="nav-right">
+      <button class="nav-icon-btn" id="contrastToggle" title="Toggle high contrast" aria-label="Toggle high contrast mode">🔆</button>
+      <button class="nav-icon-btn" id="fontSizeToggle" title="Change font size" aria-label="Change font size">Aa</button>
+      <a href="cart.html" class="nav-icon-btn" aria-label="Shopping cart">🛒<span class="cart-badge">0</span></a>
+    </div>
+  </nav>
+
+  <div class="page-search-bar" role="search" aria-label="Search content on this page">
+    <label for="pageSearchInput">Find on page:</label>
+    <input type="search" id="pageSearchInput" placeholder="Highlight text on page…" aria-label="Search page content" />
+    <span class="match-count" id="matchCount" aria-live="polite" aria-atomic="true"></span>
+    <button id="prevMatch" aria-label="Previous match">↑ Prev</button>
+    <button id="nextMatch" aria-label="Next match">↓ Next</button>
+    <button id="clearSearch" aria-label="Clear search">✕</button>
+  </div>
+
+  <div class="page-hero">
+    <div class="breadcrumb" aria-label="Breadcrumb">
+      <a href="index.html">Home</a>
+      <span class="breadcrumb-sep" aria-hidden="true">›</span>
+      <a href="cart.html">Cart</a>
+      <span class="breadcrumb-sep" aria-hidden="true">›</span>
+      <span aria-current="page">Checkout</span>
+    </div>
+    <h1 class="section-title">Secure Checkout</h1>
+    <p class="text-muted">🔒 Your payment information is encrypted and secure.</p>
+  </div>
+
+  <main id="main-content">
+    <section class="section" id="searchable-content" style="padding-top:32px;">
+
+      <!-- Step indicator -->
+      <nav class="step-indicator" aria-label="Checkout progress">
+        <div class="step done" aria-label="Cart step completed">
+          <div class="step-circle" aria-hidden="true">✓</div>
+          <div class="step-label">Cart</div>
+        </div>
+        <div class="step active" aria-label="Shipping step, current">
+          <div class="step-circle" aria-hidden="true">2</div>
+          <div class="step-label">Shipping</div>
+        </div>
+        <div class="step" aria-label="Payment step">
+          <div class="step-circle" aria-hidden="true">3</div>
+          <div class="step-label">Payment</div>
+        </div>
+        <div class="step" aria-label="Confirmation step">
+          <div class="step-circle" aria-hidden="true">4</div>
+          <div class="step-label">Confirm</div>
+        </div>
+      </nav>
+
+      <div class="checkout-layout">
+
+        <!-- Left: Form -->
+        <div>
+          <!-- Shipping -->
+          <div style="background:var(--navy-mid); border:1px solid rgba(255,255,255,0.07); border-radius:var(--radius-lg); padding:28px; margin-bottom:24px; box-shadow:var(--shadow-card);">
+            <h2 style="font-family:var(--font-display); font-weight:700; font-size:1.1rem; margin-bottom:20px;">📦 Shipping Information</h2>
+
+            <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px;">
+              <div class="form-group">
+                <label class="form-label" for="co_first">First Name *</label>
+                <input class="form-input" type="text" id="co_first" placeholder="Kwame" required autocomplete="given-name" />
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="co_last">Last Name *</label>
+                <input class="form-input" type="text" id="co_last" placeholder="Asante" required autocomplete="family-name" />
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="co_email">Email Address *</label>
+              <input class="form-input" type="email" id="co_email" placeholder="kwame@example.com" required autocomplete="email" />
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="co_phone">Phone Number *</label>
+              <input class="form-input" type="tel" id="co_phone" placeholder="+233 xx xxx xxxx" required autocomplete="tel" />
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="co_address">Delivery Address *</label>
+              <input class="form-input" type="text" id="co_address" placeholder="14 Oxford Street, Osu" required autocomplete="street-address" />
+            </div>
+
+            <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px;">
+              <div class="form-group">
+                <label class="form-label" for="co_city">City *</label>
+                <select class="form-select form-input" id="co_city" required>
+                  <option value="" disabled selected>Select city</option>
+                  <option>Accra</option>
+                  <option>Kumasi</option>
+                  <option>Tamale</option>
+                  <option>Cape Coast</option>
+                  <option>Takoradi</option>
+                  <option>Sunyani</option>
+                  <option>Other</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="co_region">Region *</label>
+                <select class="form-select form-input" id="co_region" required>
+                  <option value="" disabled selected>Select region</option>
+                  <option>Greater Accra</option>
+                  <option>Ashanti</option>
+                  <option>Northern</option>
+                  <option>Central</option>
+                  <option>Western</option>
+                  <option>Eastern</option>
+                  <option>Volta</option>
+                  <option>Upper East</option>
+                  <option>Upper West</option>
+                  <option>Brong-Ahafo</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="co_notes">Delivery Notes (optional)</label>
+              <textarea class="form-textarea form-input" id="co_notes" rows="2" placeholder="Gate colour, landmark, special instructions…"></textarea>
+            </div>
+          </div>
+
+          <!-- Payment -->
+          <div style="background:var(--navy-mid); border:1px solid rgba(255,255,255,0.07); border-radius:var(--radius-lg); padding:28px; box-shadow:var(--shadow-card);">
+            <h2 style="font-family:var(--font-display); font-weight:700; font-size:1.1rem; margin-bottom:20px;">💳 Payment Method</h2>
+
+            <div role="radiogroup" aria-label="Payment method options">
+              <label class="payment-option selected" id="pm_momo">
+                <input type="radio" name="payment" value="momo" checked aria-label="MTN Mobile Money" />
+                <span style="font-size:1.4rem;" aria-hidden="true">📱</span>
+                <div>
+                  <div style="font-weight:600; font-size:0.9rem;">MTN Mobile Money</div>
+                  <div class="text-small text-muted">Enter your MoMo number at confirmation</div>
+                </div>
+              </label>
+
+              <label class="payment-option" id="pm_voda">
+                <input type="radio" name="payment" value="vodafone" aria-label="Vodafone Cash" />
+                <span style="font-size:1.4rem;" aria-hidden="true">📱</span>
+                <div>
+                  <div style="font-weight:600; font-size:0.9rem;">Vodafone Cash</div>
+                  <div class="text-small text-muted">Instant payment via Vodafone Cash</div>
+                </div>
+              </label>
+
+              <label class="payment-option" id="pm_card">
+                <input type="radio" name="payment" value="card" aria-label="Credit or debit card" />
+                <span style="font-size:1.4rem;" aria-hidden="true">💳</span>
+                <div>
+                  <div style="font-weight:600; font-size:0.9rem;">Credit / Debit Card</div>
+                  <div class="text-small text-muted">Visa, Mastercard, Verve accepted</div>
+                </div>
+              </label>
+
+              <label class="payment-option" id="pm_bank">
+                <input type="radio" name="payment" value="bank" aria-label="Bank transfer" />
+                <span style="font-size:1.4rem;" aria-hidden="true">🏦</span>
+                <div>
+                  <div style="font-weight:600; font-size:0.9rem;">Bank Transfer</div>
+                  <div class="text-small text-muted">Direct transfer to TechNova account</div>
+                </div>
+              </label>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right: Summary -->
+        <div>
+          <div class="order-summary" aria-label="Order summary" id="checkoutSummary">
+            <h2 style="font-family:var(--font-display); font-weight:700; font-size:1.1rem; margin-bottom:16px;">Order Summary</h2>
+            <div id="checkoutItems" style="margin-bottom:16px; border-bottom:1px solid rgba(255,255,255,0.07); padding-bottom:16px;"></div>
+            <div class="order-row"><span>Subtotal</span><span id="co_sub">GH₵ 0.00</span></div>
+            <div class="order-row"><span>Shipping</span><span id="co_ship">GH₵ 25.00</span></div>
+            <div class="order-row total"><span>Total</span><span class="price" id="co_total">GH₵ 0.00</span></div>
+            <button onclick="placeOrder()" class="btn btn-primary" style="width:100%; justify-content:center; margin-top:20px; font-size:1rem; padding:14px;">
+              Place Order 🛒
+            </button>
+            <p class="text-small text-muted text-center mt-16">By placing your order you agree to our <a href="#" style="color:var(--blue-glow);">Terms &amp; Conditions</a></p>
+          </div>
+        </div>
+
+      </div>
+    </section>
+  </main>
+
+  <!-- Success Overlay -->
+  <div class="success-overlay" id="successOverlay" role="dialog" aria-modal="true" aria-labelledby="success-title">
+    <div style="max-width:480px;">
+      <div style="font-size:5rem; margin-bottom:20px;" aria-hidden="true">🎉</div>
+      <h2 id="success-title" style="font-family:var(--font-display); font-size:2rem; font-weight:800; margin-bottom:12px;">Order Placed!</h2>
+      <p class="text-muted" style="margin-bottom:8px;">Thank you for shopping with TechNova Store.</p>
+      <p style="margin-bottom:32px;">Your order <strong id="orderNum" style="color:var(--amber);">#TN-000000</strong> has been received. You'll get an SMS and email confirmation shortly.</p>
+      <a href="shop.html" class="btn btn-primary" style="font-size:1rem; padding:14px 36px;">Continue Shopping &rarr;</a>
+    </div>
+  </div>
+
+  <footer role="contentinfo">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="index.html" class="nav-logo" style="display:inline-flex"><div class="logo-icon" aria-hidden="true">⚡</div>Tech<span>Nova</span></a>
+        <p>Ghana's trusted online tech store.</p>
+      </div>
+      <div><h3 class="footer-col-title">Shop</h3><ul class="footer-links"><li><a href="shop.html">All Products</a></li></ul></div>
+      <div><h3 class="footer-col-title">Company</h3><ul class="footer-links"><li><a href="about.html">About Us</a></li></ul></div>
+      <div><h3 class="footer-col-title">Support</h3><ul class="footer-links"><li><a href="#">FAQ</a></li></ul></div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2025 TechNova Store. All rights reserved. 🇬🇭</p>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+  <script>
+    // Render checkout summary
+    (function() {
+      const cart = getCart();
+      const itemsEl = document.getElementById('checkoutItems');
+      if (!cart.length) {
+        itemsEl.innerHTML = '<p class="text-muted text-small">No items in cart. <a href="shop.html" style="color:var(--blue-glow);">Shop now</a></p>';
+        return;
+      }
+      itemsEl.innerHTML = cart.map(i => `
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px; font-size:0.875rem;">
+          <span>${i.name} <span class="text-muted">x${i.qty}</span></span>
+          <span>GH₵ ${(i.price*i.qty).toLocaleString()}</span>
+        </div>`).join('');
+      const sub = cart.reduce((s,i) => s+i.price*i.qty, 0);
+      const ship = sub > 500 ? 0 : 25;
+      document.getElementById('co_sub').textContent = 'GH₵ ' + sub.toFixed(2);
+      document.getElementById('co_ship').textContent = ship === 0 ? 'FREE' : 'GH₵ ' + ship.toFixed(2);
+      document.getElementById('co_total').textContent = 'GH₵ ' + (sub+ship).toFixed(2);
+    })();
+
+    // Payment option highlight
+    document.querySelectorAll('.payment-option input[type=radio]').forEach(radio => {
+      radio.addEventListener('change', () => {
+        document.querySelectorAll('.payment-option').forEach(el => el.classList.remove('selected'));
+        radio.closest('.payment-option').classList.add('selected');
+      });
+    });
+
+    function placeOrder() {
+      const first = document.getElementById('co_first').value.trim();
+      const email = document.getElementById('co_email').value.trim();
+      const phone = document.getElementById('co_phone').value.trim();
+      const addr  = document.getElementById('co_address').value.trim();
+      if (!first || !email || !phone || !addr) { showToast('Please fill in all required fields.'); return; }
+      const orderNum = '#TN-' + Math.floor(100000 + Math.random() * 900000);
+      document.getElementById('orderNum').textContent = orderNum;
+      document.getElementById('successOverlay').classList.add('show');
+      saveCart([]);
+    }
+  </script>
+</body>
+</html>
